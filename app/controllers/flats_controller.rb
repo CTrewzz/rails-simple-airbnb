@@ -1,4 +1,5 @@
 class FlatsController < ApplicationController
+  before_action :set_flat, only: [:show, :edit, :update, :destroy]
   def index
     if params[:query]
       @flats = Flat.where("name LIKE '%#{params[:query]}%'")
@@ -9,7 +10,6 @@ class FlatsController < ApplicationController
   # @flats = Flat.where("name LIKE '%garden%'"
 
   def show
-    @flat = Flat.find(params[:id])
   end
 
   def new
@@ -27,11 +27,9 @@ class FlatsController < ApplicationController
   end
 
   def edit
-    @flat = Flat.find(params[:id])
   end
 
   def update
-    @flat = Flat.find(params[:id])
     if @flat.update(flat_params)
       redirect_to @flat, notice: 'Flat has been updated'
     else
@@ -40,13 +38,16 @@ class FlatsController < ApplicationController
   end
 
   def destroy
-    @flat = Flat.find(params[:id])
     @flat.destroy
 
     redirect_to flats_path, notice: 'Flat has been removed'
   end
 
   private
+
+  def set_flat
+    @flat = Flat.find(params[:id])
+  end
 
   def flat_params
     params.require(:flat).permit(:name, :address, :description, :price_per_night, :number_of_guests)
