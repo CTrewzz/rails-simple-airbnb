@@ -1,0 +1,29 @@
+<p>
+  <strong>Name:</strong>
+  <%= @flat.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @flat.address %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @flat.description %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @flat.price_per_night %><%="$" %>
+</p>
+
+<p>
+  <strong>Number of guests:</strong>
+  <%= @flat.number_of_guests %>
+</p>
+<td><%= link_to "Edit Flat", edit_flat_path, class: "btn btn-primary"%></td>
+<td><%= link_to "Back to the list", flats_path, class: "btn btn-primary"%></td>
+<td><%= link_to 'Delete', @flat,
+                        method: :delete,
+                        data: { confirm: 'Do you want to delete it?'}, class: "btn btn-danger" %> </td>
